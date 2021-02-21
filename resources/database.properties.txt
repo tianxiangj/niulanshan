@@ -1,0 +1,4 @@
+url=helloworld
+driver=com.mysql.jdbc.Driver
+username=root
+password=root
