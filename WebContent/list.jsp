@@ -1,4 +1,4 @@
-<%@ page language="java" import="com.utils.*, java.sql.*,java.math.BigDecimal" contentType="text/html; charset=utf-8"
+<%@ page language="java" import="com.utils.*, java.sql.*,java.math.BigDecimal,java.util.*" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
@@ -9,26 +9,38 @@
 </head>
 <body>
 	<%
-
-	int id=0;
-	String name=null;
-	String dishMegs=null;
-	String times=null;
-	String address=null;
-	int states=0;
-	BigDecimal sumPrice;
+	List<Integer> idList=new ArrayList<>();
+	List<String> nameList=new ArrayList<>();
+	List<String> dishMegsList=new ArrayList<>();
+	List<String> timesList=new ArrayList<>();
+	List<String> addressList=new ArrayList<>();
+	List<Integer> statesList=new ArrayList<>();
+	List<BigDecimal> sumPriceList=new ArrayList<>();
+	
 	Connection conn=JDBCConnUtil.getConnection();
 	String sql="select * from `order`";
 	PreparedStatement pstmt=conn.prepareStatement(sql);
 	ResultSet rs= pstmt.executeQuery();
 	while(rs.next()){
-		id=rs.getInt("id");
-		name=rs.getString("name");
-		dishMegs=rs.getString("dish_megs");
-		times=rs.getString("times");
+		int id=rs.getInt("id");
+		String name=rs.getString("name");
+		String dishMegs=rs.getString("dish_megs");
+		String times=rs.getString("times");
+		String address=rs.getString("address");
+		int states=rs.getInt("states");
+		BigDecimal sumPrice=rs.getBigDecimal("sum_price");
+		idList.add(id);
+		nameList.add(name);
+		dishMegsList.add(dishMegs);
+		timesList.add(times);
+		addressList.add(address);
+		statesList.add(states);
+		sumPriceList.add(sumPrice);
 	}
 	%>
-	  <table>
+
+	<a href="add.jsp">新增订单</a>
+	  <table style="">
 	     <tr>
             <th>订单名称</th>
             <th>菜品</th>
@@ -39,8 +51,24 @@
             <th>总金额</th>
             <th>操作</th>
         </tr>
-	<c:forEach var="" items="\">
- 	</c:forEach>
- 	</table>
+        
+    <%
+	int j=0;
+	for(int i=0;i<nameList.size();i++){
+	%>
+	 <tr>
+	 <td><%=idList.get(i) %></td>
+	 <td><%=nameList.get(i) %></td>
+	 <td><%=dishMegsList.get(i) %></td>
+	 <td><%=timesList.get(i) %></td>
+	 <td><%=addressList.get(i) %></td>
+	  <td><%=statesList.get(i) %></td>
+	  <td><%=sumPriceList.get(i) %></td>
+	  <td><a href="update.jsp">更新    </a><a href="list.jsp">删除</a></td>
+	 </tr>
+ 	<% 
+ 		}
+	%>
+	</table>
 </body>
 </html>
