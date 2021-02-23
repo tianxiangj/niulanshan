@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%
+int id=Integer.parseInt(request.getParameter("id"));
+Connection conn=JDBCConnUtil.getConnection();
+String sql="delete from `order` where id=?";
+PreparedStatement pstmt=conn.prepareStatement(sql);
+pstmt.setObject(1, id);
+pstmt.executeUpdate();
+response.sendRedirect("list.jsp");
+%>
 </body>
 </html>

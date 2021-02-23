@@ -9,6 +9,8 @@
 </head>
 <body>
 	<%
+
+
 	List<Integer> idList=new ArrayList<>();
 	List<String> nameList=new ArrayList<>();
 	List<String> dishMegsList=new ArrayList<>();
@@ -38,7 +40,7 @@
 		sumPriceList.add(sumPrice);
 	}
 	%>
-
+	<div align="center">
 	<a href="add.jsp">新增订单</a>
 	  <table style="">
 	     <tr>
@@ -64,11 +66,13 @@
 	 <td><%=addressList.get(i) %></td>
 	  <td><%=statesList.get(i) %></td>
 	  <td><%=sumPriceList.get(i) %></td>
-	  <td><a href="update.jsp">更新    </a><a href="list.jsp">删除</a></td>
+	  <td><a href="update.jsp?id=<%=idList.get(i)%>">更新   </a><a href="delete.jsp?id=<%=idList.get(i)%>">删除</a></td>
 	 </tr>
  	<% 
  		}
 	%>
 	</table>
+	</div>
+	  
 </body>
 </html>
