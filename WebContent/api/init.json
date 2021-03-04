@@ -1,0 +1,163 @@
+{
+  "homeInfo": {
+    "title": "妫ｆ牠銆�",
+    "href": "page/welcome-1.html?t=1"
+  },
+  "logoInfo": {
+    "title": "LAYUI MINI",
+    "image": "images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "首页",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "控制面板",
+          "href": "",
+          "icon": "fa fa-home",
+          "target": "_self",
+          "child": [
+            {
+              "title": "基本设置",
+              "href": "page/welcome-1.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
+        },
+       
+        {
+          "title": "支付设置",
+          "href": "",
+          "icon": "fa fa-calendar",
+          "target": "_self",
+          "child": [
+            {
+              "title": "支付方式列表",
+              "href": "page/form.html",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            },
+            {
+              "title": "添加支付方式",
+              "href": "page/form-step.html",
+              "icon": "fa fa-navicon",
+              "target": "_self"
+            }
+          ]
+        }                    
+      ]
+    },
+    
+    {
+      "title": "商品管理",
+      "icon": "fa fa-lemon-o",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "分类管理",
+          "href": "",
+          "icon": "fa fa-dot-circle-o",
+          "target": "_self",
+           "child": [
+           {
+          "title": "商品分类管理",
+          "href": "page/icon-picker2.html",
+          "icon": "fa fa-adn",
+          "target": "_self"
+           }
+           ]         
+        },
+       
+        {
+          "title": "商品管理",
+          "href": "",
+          "icon": "fa fa-dot-circle-o",
+          "target": "_self",
+           "child": [
+           {
+          "title": "出售中的商品",
+          "href": "page/icon-picker1.html",
+          "icon": "fa fa-adn",
+          "target": "_self"
+           },
+           {
+          "title": "下架中的商品",
+          "href": "",
+          "icon": "fa fa-adn",
+          "target": "_self"
+           }
+           ]         
+        } 
+      ]
+    },
+    
+    
+    
+     {
+      "title": "订单管理",
+      "icon": "fa fa-lemon-o",
+      "href": "",
+      "target": "_self",
+      "child": [
+
+           {
+          "title": "订单列表",
+          "href": "page/icon-picker3.html",
+          "icon": "fa fa-adn",
+          "target": "_self"
+           }      
+      ]
+    },
+          
+              
+    {
+      "title": "库存管理",
+      "icon": "fa fa-lemon-o",
+      "href": "",
+      "target": "_self",
+      "child": [
+           {
+          "title": "供应管理",
+          "href": "",
+          "icon": "fa fa-adn",
+          "target": "_self",
+          "child": [
+          	{
+          "title": "供应商列表",
+          "href": "page/icon-picker4.html",
+          "icon": "fa fa-adn",
+          "target": "_self"
+          	},
+          	{
+          "title": "供应商详情页",
+          "href": "page/icon-picker5.html",
+          "icon": "fa fa-adn",
+          "target": "_self"
+          	},
+          	{
+          "title": "编辑供应商",
+          "href": "page/icon-picker6.html",
+          "icon": "fa fa-adn",
+          "target": "_self"
+          	},
+          	{
+          "title": "新增供应商",
+          "href": "page/icon-picker7.html",
+          "icon": "fa fa-adn",
+          "target": "_self"
+          	}
+           ]
+           }      
+      ]
+    }
+
+  ]
+}
+   
+   
