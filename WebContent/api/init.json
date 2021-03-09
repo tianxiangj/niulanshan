@@ -4,8 +4,8 @@
     "href": "page/welcome-1.html?t=1"
   },
   "logoInfo": {
-    "title": "LAYUI MINI",
-    "image": "images/logo.png",
+    "title": "niulanshan",
+    "image": "images/niulanshan.jpg",
     "href": ""
   },
   "menuInfo": [
@@ -38,7 +38,7 @@
           "child": [
             {
               "title": "支付方式列表",
-              "href": "page/form.html",
+              "href": "page/setting.html",
               "icon": "fa fa-list-alt",
               "target": "_self"
             },

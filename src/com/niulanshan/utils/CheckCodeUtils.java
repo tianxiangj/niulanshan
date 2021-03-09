@@ -41,7 +41,7 @@ public class CheckCodeUtils {
             sb.append(c);
         }
         String checkCode = sb.toString();
-        System.out.println(checkCode);
+       // System.out.println(checkCode);
         //将验证码放入HttpSession中
         request.getSession().setAttribute("CHECKCODE_SERVER", checkCode);
 

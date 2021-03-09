@@ -54,7 +54,9 @@ public class UploadUtils {
     private String saveUrl;  
     // 文件最终的url包括文件名  
     private String fileUrl;  
-  
+  //非文件上传域map
+    private Map<String,String> foList;
+    
     public UploadUtils() {  
         // 其中images,flashs,medias,files,对应文件夹名称,对应dirName  
         // key文件夹名称  
@@ -83,6 +85,8 @@ public class UploadUtils {
         }  
         // 上传  
         List<FileItem> fiList = (List<FileItem>) fieldsMap.get(UploadUtils.FILE_FIELDS);  
+        //普通域
+        foList=(Map<String, String>) fieldsMap.get(UploadUtils.FORM_FIELDS);  
         if (fiList != null) {  
             for (FileItem item : fiList) {  
                 infos[1] = this.saveFile(item);  

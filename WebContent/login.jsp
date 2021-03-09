@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%
+ String path = request.getContextPath();
+ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,34 +43,40 @@
         <div class="layui-form login-form">
             <form class="layui-form" action="">
                 <div class="layui-form-item logo-title">
-                    <h1>LayuiMini后台登录</h1>
+                    <h1>niulanshan</h1>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-username" for="username"></label>
-                    <input type="text" name="username" lay-verify="required|account" placeholder="用户名或者邮箱" autocomplete="off" class="layui-input" value="admin">
+                    <input type="text" id="username" name="name" lay-verify="required|account" placeholder="用户名或者邮箱" autocomplete="off" class="layui-input" value="">
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-password" for="password"></label>
-                    <input type="password" name="password" lay-verify="required|password" placeholder="密码" autocomplete="off" class="layui-input" value="123456">
+                    <input type="password" id="userpwd" name="pwd" lay-verify="required|password" placeholder="密码" autocomplete="off" class="layui-input" value="">
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-vercode" for="captcha"></label>
-                    <input type="text" name="captcha" lay-verify="required|captcha" placeholder="图形验证码" autocomplete="off" class="layui-input verification captcha" value="xszg">
+                    <input type="text" name="captcha" lay-verify="required|captcha" placeholder="图形验证码" autocomplete="off" class="layui-input verification captcha" >
                     <div class="captcha-img">
-                        <img id="captchaPic" src="images/captcha.jpg">
+                        <img id="check" src="${pageContext.request.contextPath}/login?action=cache">
                     </div>
                 </div>
+                
                 <div class="layui-form-item">
-                    <input type="checkbox" name="rememberMe" value="true" lay-skin="primary" title="记住密码">
+                    <input type="checkbox" name="textpwd" id="checked" value="true" lay-skin="primary" title="记住密码" >
+                    <a href="${pageContext.request.contextPath}/login?action=ftp" style="margin-left: 100px" >忘记密码？</a>
                 </div>
+                
+                
                 <div class="layui-form-item">
-                    <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit="" lay-filter="login">登 入</button>
+                    <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit="" lay-filter="login" id="login">登 入</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 <script src="lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="lib/jquery.cookie.js" charset="utf-8"></script>
+<script src="js/ajax.js" charset="utf-8"></script>
 <script src="lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="lib/jq-module/jquery.particleground.min.js" charset="utf-8"></script>
 <script>
@@ -85,27 +95,73 @@
             });
         });
 
-        // 进行登录操作
-        form.on('submit(login)', function (data) {
-            data = data.field;
-            if (data.username == '') {
-                layer.msg('用户名不能为空');
-                return false;
-            }
-            if (data.password == '') {
-                layer.msg('密码不能为空');
-                return false;
-            }
-            if (data.captcha == '') {
-                layer.msg('验证码不能为空');
-                return false;
-            }
-            layer.msg('登录成功', function () {
-                window.location = '../index.html';
-            });
-            return false;
-        });
+      //自定义验证规则
+    	form.verify({
+    		userName: function(value) {
+    			if (value == '') {
+    				return '用户名不能为空';
+    			}
+    		},
+    		pwd: function(value) {
+    			if (value == '') {
+    				return '密码不能为空';
+    			} else if (value.length < 6 || value.length > 11) {
+    				return '请正确输入6~11位密码';
+    			}
+    		}
+    	});
+
+
+     // $("#login").click(function () {
+    	// var data= ajax(type,url,json);
+       //   )}
+
+        
+    	form.on('submit(login)', function(data) {		
+    			var param = data.field;
+    			
+    			$.ajax({
+    				type : "post",
+    				url :' <%=basePath%>login?action=login',
+    				data : param,
+    				dataType : "json",
+    				success : function(data){	
+    					console.log(data);
+    					if(data == '1'){   						
+    						layer.msg('登录成功！', {anim: 3, icon: 6, time: 2000, shade: 0.1});
+    						setTimeout(function() {
+    							window.location = 'index.jsp';
+    						}, 1000);
+    					} else if(data == '0') {
+    		                  layer.msg('密码或用户名错误，登录失败',{anim: 6, icon: 5, time: 1500, shade: 0.1});
+    		                  $('#userpwd').val("");
+    					} else if(data == '-1') {
+  		                  layer.msg('验证码错误，登录失败',{anim: 6, icon: 5, time: 1500, shade: 0.1});
+		                  $('#userpwd').val("");
+					} 
+    				},
+    				error:function(xhr){
+    					//alert("错误提示： " + xhr.status + " " + xhr.statusText);
+    					window.location = '500.jsp';
+    				}
+    			});
+    		
+    		return false;
+    	});
     });
+    
+	 $('#username').val($.cookie("cookieuser"));  
+	 $('#userpwd').val($.cookie("cookiePwd"));  
+	if($.cookie("cookieuser")!=null){
+		$("#checked").prop("checked",true);
+		}
+  //验证码点击刷新
+      var elementById = document.getElementById("check");
+      elementById.onclick=function () {
+          var date = new Date();
+          var time = date.getTime();
+          elementById.src="${pageContext.request.contextPath}/login?action=cache&"+time;
+      }
 </script>
 </body>
 </html>
